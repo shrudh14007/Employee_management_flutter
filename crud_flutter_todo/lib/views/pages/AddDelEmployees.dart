@@ -20,6 +20,7 @@ class _AddDelEmployeesState extends State<AddDelEmployees> {
   String? selectedGender;
   String? selectedCompany;
   String? selectedDepartment;
+  // Add other necessary variables for date of birth, etc.
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class _AddDelEmployeesState extends State<AddDelEmployees> {
          EmployeeFormTextField(controller: emailController,hint: "Enter Email", keyboardType: TextInputType.emailAddress, labelText: "Email",),
          SizedBox(height: 20,),
          EmployeeFormTextField(controller: phoneController,hint: "Enter Phone", keyboardType: TextInputType.phone, labelText: "Phone",),
-        SizedBox(height: 20,),
+        SizedBox(height: 30,),
         
         
         Row(
