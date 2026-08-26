@@ -1,11 +1,14 @@
 import 'package:crud_flutter_todo/user.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:crud_flutter_todo/providers/user_provider.dart';
 
-class Employeelistview extends StatelessWidget {
+class Employeelistview extends ConsumerWidget {
   const Employeelistview({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
+    final userList = ref.watch(usersProvider);
     return Scaffold(
       appBar: AppBar(
          backgroundColor: Colors.lightBlueAccent,
@@ -16,14 +19,14 @@ class Employeelistview extends StatelessWidget {
         
       itemBuilder: (BuildContext context,int index){
         return ListTile(
-          title: Text(users[index].name),
-          subtitle: Text(users[index].profession),
+          title: Text(userList[index].name),
+          subtitle: Text(userList[index].profession),
         );
       }, 
       separatorBuilder:(BuildContext context,int index){
         return const Divider(height: 1);
       } ,
-       itemCount: users.length),
+       itemCount: userList.length),
       );
   }
 }

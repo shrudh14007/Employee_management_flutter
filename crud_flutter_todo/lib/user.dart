@@ -8,9 +8,8 @@ class User{
   );
 }
 
-List users =[
-User('Shrudhir', 'Developer'),
-User('Dhoni', 'Keeper'),
-User('Sundar Pichai', 'CEO')
-
+List<User> users = [
+  User('Shrudhir', 'Developer'),
+  User('Dhoni', 'Keeper'),
+  User('Sundar Pichai', 'CEO'),
 ];
