@@ -14,6 +14,12 @@ class UsersNotifier extends Notifier<List<User>>{
   }
 }
 
+void addUser(String name, String profession){
+  state = [
+    ...state, User(name,proffesion)
+  ];
+}
+
 final usersProvider = NotifierProvider<UsersNotifier, List<User>>(
   UsersNotifier.new
 )
