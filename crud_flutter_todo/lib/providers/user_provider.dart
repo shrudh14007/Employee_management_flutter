@@ -20,6 +20,18 @@ void addUser(String name, String profession){
   ];
 }
 
+void deleteUser(int index){
+  final newUsers=[...state];
+  newUsers.removeAt(index);
+  state = newUsers;
+}
+
+void updateUsers(int index, String name, String profession){
+  final newUsers = [...state];
+  newUsers[index] = User(name,profession);
+  state = newUsers;
+}
+
 final usersProvider = NotifierProvider<UsersNotifier, List<User>>(
   UsersNotifier.new
 )
