@@ -1,4 +1,4 @@
-import 'package:crud_flutter_todo/user.dart';
+// import 'package:crud_flutter_todo/user.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:crud_flutter_todo/providers/user_provider.dart';
@@ -15,6 +15,12 @@ class Employeelistview extends ConsumerWidget {
          foregroundColor: Colors.white,
 
         title: const Text('EMPLOYEE LIST'),centerTitle: true,),
+      floatingActionButton: FloatingActionButton(
+        onPressed:(){
+          ref.read(usersProvider.notifier).addUser('Alice','Designer');
+        },
+        child: const Icon(Icons.add),
+      ),
       body: ListView.separated(
         
       itemBuilder: (BuildContext context,int index){
