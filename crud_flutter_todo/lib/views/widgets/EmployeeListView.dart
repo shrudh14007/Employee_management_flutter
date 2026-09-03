@@ -27,6 +27,13 @@ class Employeelistview extends ConsumerWidget {
         return ListTile(
           title: Text(userList[index].name),
           subtitle: Text(userList[index].profession),
+
+          trailing:IconButton(
+            icon: const Icon(Icons.delete),
+            onPressed:(){
+              ref.read(usersProvider.notifier).deleteUser(index);
+            }
+          )
         );
       }, 
       separatorBuilder:(BuildContext context,int index){
