@@ -43,7 +43,7 @@ class DatabaseService {
     );
     return database;
   }
-  void addTask(String content
+  Future<void> addTask(String content
   )async{
     final db = await database ;
     await db.insert(_tasksTableName,{

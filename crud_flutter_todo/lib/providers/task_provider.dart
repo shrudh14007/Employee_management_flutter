@@ -8,8 +8,23 @@ class TaskNotifier extends AsyncNotifier<List<Task>>{
         final tasks = await DatabaseService.instance.getTasks();
         return tasks ?? [];
     }
+    // Future<void>addTask(String content) async{
+    //     final db = await database;
+    //     await db.insert(
+    //         _tasksTableName,
+    //         {
+    //             _tasksContentColumnName: content,
+    //             _tasksStatusColumnName: 0,
+    //         },
+    //     );
+    // }
+    Future<void> addTask(String content) async{
+        await DatabaseService.instance.addTask(content);
+        ref.invalidateSelf();
+
+    }
 }
 
 final taskProvider = AsyncNotifierProvider<TaskNotifier, List<Task>>(
     TaskNotifier.new,
-)
+);
