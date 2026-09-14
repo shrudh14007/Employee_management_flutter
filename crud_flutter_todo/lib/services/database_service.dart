@@ -64,7 +64,7 @@ class DatabaseService {
   return tasks;
   }
  
-void updateTaskStatus(int id, int status) async{
+Future<void> updateTaskStatus(int id, int status) async{
   final db = await database;
   await db.update(_tasksTableName, {
     _tasksStatusColumnName:status
@@ -74,10 +74,20 @@ void updateTaskStatus(int id, int status) async{
     id,
   ], 
   );
-
-
 }
-void deleteTask(int id) async {
+
+Future<void> updateTask(int id, String content)async{
+  final db = await database;
+  await db.update(_tasksTableName,
+  {
+    _tasksContentColumnName:content,
+  },
+  where:'id=?',
+  whereArgs:[id],
+  );
+}
+
+Future<void> deleteTask(int id) async {
   final db = await database;
   await db.delete(_tasksTableName,
   where: 'id=?',

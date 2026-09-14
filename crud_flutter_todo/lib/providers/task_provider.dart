@@ -21,7 +21,17 @@ class TaskNotifier extends AsyncNotifier<List<Task>>{
     Future<void> addTask(String content) async{
         await DatabaseService.instance.addTask(content);
         ref.invalidateSelf();
+    }
 
+    Future<void> deleteTask(int id) async{
+        await DatabaseService.instance.deleteTask(id);
+        ref.invalidateSelf();
+    }
+
+    Future<void> updateTask(int id, String content) async{
+        await DatabaseService.instance.updateTask(id,content);
+    
+        ref.invalidateSelf();
     }
 }
 
