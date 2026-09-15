@@ -1,4 +1,4 @@
-# 👥 Employee Management App — Flutter
+#  Employee Management App — Flutter
 
 A full-stack Flutter application demonstrating **mobile UI development, local database management, REST API integration, authentication, form validation, and backend development**.
 
@@ -6,7 +6,7 @@ The project consists of a Flutter client application and a Node.js/Express backe
 
 ---
 
-## 🚀 Project Overview
+##  Project Overview
 
 This project was developed to explore how a Flutter application can communicate with a backend API while also maintaining local application data.
 
@@ -48,7 +48,7 @@ The current repository therefore demonstrates both **mobile frontend development
 
 ---
 
-# 🛠️ Tech Stack
+#  Tech Stack
 
 ## Frontend
 
@@ -81,7 +81,7 @@ The backend's `package.json` confirms Express, PostgreSQL (`pg`), bcryptjs, and 
 
 ---
 
-# 🏗️ Architecture
+#  Architecture
 
 The project follows a basic layered architecture:
 
@@ -119,7 +119,7 @@ The Flutter `lib` directory is separated into `models`, `services`, and `views`,
 
 ---
 
-# 📁 Project Structure
+#  Project Structure
 
 ```text
 Employee_management_flutter/
@@ -168,7 +168,7 @@ The repository currently contains separate Flutter and Node.js projects.
 
 ---
 
-# ⚛️ Flutter Architecture
+#  Flutter Architecture
 
 ## Models
 
@@ -188,7 +188,7 @@ This keeps the data representation separate from UI implementation.
 
 ---
 
-# 🗄️ SQLite Database Layer
+#  SQLite Database Layer
 
 The project uses the `sqflite` package to provide local SQLite persistence.
 
@@ -234,7 +234,7 @@ The implementation uses parameterised SQLite queries for update/delete condition
 
 ---
 
-# 🔄 CRUD Operations
+#  CRUD Operations
 
 The local database layer demonstrates the core CRUD operations.
 
@@ -291,7 +291,7 @@ The `DatabaseService` implements these operations in the Flutter application.
 
 ---
 
-# 🔐 Authentication Architecture
+#  Authentication Architecture
 
 The backend implements authentication using:
 
@@ -334,7 +334,7 @@ The backend implements `/register`, `/login`, and `/profile` endpoints.
 
 ---
 
-# 🔑 Password Security
+# Password Security
 
 Passwords are not stored directly in plaintext.
 
@@ -361,7 +361,7 @@ This demonstrates the basic principle of **secure password storage using one-way
 
 ---
 
-# 🎫 JWT Authentication
+#  JWT Authentication
 
 After successful authentication, the backend generates a JSON Web Token:
 
@@ -390,7 +390,7 @@ This demonstrates token-based authentication between a mobile client and backend
 
 ---
 
-# 🌐 REST API
+#  REST API
 
 The Node.js backend is implemented using Express.
 
@@ -406,7 +406,7 @@ The Express server listens on port `3000`.
 
 ---
 
-# 🐘 PostgreSQL Integration
+#  PostgreSQL Integration
 
 The backend communicates with PostgreSQL through the `pg` package.
 
@@ -433,7 +433,7 @@ The `database.js` module provides the database connection used by the Express se
 
 ---
 
-# 📱 UI & Reusable Components
+#  UI & Reusable Components
 
 The Flutter application separates UI into views and reusable widgets.
 
@@ -451,7 +451,7 @@ The project also uses the `material_text_fields` package to build customised for
 
 ---
 
-# 🧠 State Management
+#  State Management
 
 The project includes **Riverpod** for application state management.
 
@@ -465,7 +465,7 @@ This allows the application to evolve from local widget state toward shared appl
 
 ---
 
-# 📝 Form Validation
+#  Form Validation
 
 The application uses:
 
@@ -487,7 +487,7 @@ Examples of validation that can be applied include:
 
 ---
 
-# 🔌 API Communication
+#  API Communication
 
 The Flutter application includes the `http` package:
 
@@ -514,7 +514,7 @@ This separates the mobile UI from backend data storage and allows the applicatio
 
 ---
 
-# 📅 Calendar & Data Visualisation
+#  Calendar & Data Visualisation
 
 The Flutter application includes:
 
@@ -536,7 +536,7 @@ The dependency is currently included in the project's Flutter configuration.
 
 ---
 
-# 🔄 End-to-End Data Flow
+#  End-to-End Data Flow
 
 A typical authenticated application flow can be represented as:
 
@@ -587,7 +587,7 @@ This project therefore demonstrates both **remote API-based data handling and lo
 
 ---
 
-# 🚀 Getting Started
+#  Getting Started
 
 ## Prerequisites
 
@@ -615,7 +615,7 @@ cd Employee_management_flutter
 
 ---
 
-# 📱 Running the Flutter Application
+#  Running the Flutter Application
 
 Navigate to the Flutter project:
 
@@ -655,7 +655,7 @@ flutter test
 
 ---
 
-# 🖥️ Running the Backend
+#  Running the Backend
 
 Open another terminal:
 
@@ -687,7 +687,7 @@ The backend's Express application currently listens on port `3000`.
 
 ---
 
-# 🔐 Authentication Flow
+#  Authentication Flow
 
 ### Registration
 
@@ -734,7 +734,7 @@ The server validates the token before returning the decoded user information.
 
 ---
 
-# 🧪 Technical Concepts Demonstrated
+#  Technical Concepts Demonstrated
 
 This project demonstrates practical experience with:
 
@@ -784,7 +784,7 @@ This project demonstrates practical experience with:
 
 ---
 
-# 🔮 Future Improvements
+#  Future Improvements
 
 The project can be extended into a more complete employee management system.
 
@@ -846,7 +846,7 @@ DELETE /employees/:id
 
 ---
 
-# 🧩 Potential Production Architecture
+#  Potential Production Architecture
 
 A future production version could follow:
 
@@ -880,7 +880,7 @@ This architecture would allow the application to scale while keeping the Flutter
 
 ---
 
-# 🎯 Learning Objectives
+#  Learning Objectives
 
 The main purpose of this project was to gain practical experience building a mobile application beyond basic UI development.
 
@@ -901,7 +901,7 @@ Key areas explored include:
 
 ---
 
-# 👨‍💻 Author
+#  Author
 
 **Shrudhir Praveen**
 
@@ -913,7 +913,7 @@ https://github.com/shrudh14007/Employee_management_flutter
 
 ---
 
-## ⭐ Project Status
+##  Project Status
 
 This project is currently a **learning and development project** demonstrating Flutter, local database operations, backend APIs, and authentication concepts.
 
