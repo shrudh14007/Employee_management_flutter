@@ -2,20 +2,20 @@ import 'package:crud_flutter_todo/views/login/login.dart';
 import 'package:crud_flutter_todo/views/pages/EmployeesPage.dart';
 import 'package:crud_flutter_todo/views/pages/AddDelEmployees.dart';
 import 'package:crud_flutter_todo/views/pages/AttendancePage.dart';
-import 'package:crud_flutter_todo/services/database_service.dart';
+// import 'package:crud_flutter_todo/services/database_service.dart';
 import 'package:crud_flutter_todo/views/widgets/HeatMap.dart';
 import 'package:flutter/material.dart';
-import 'package:crud_flutter_todo/views/login/login.dart';
+// import 'package:crud_flutter_todo/views/login/login.dart';
 
 
-import '../../models/task.dart';
+
 class Homepage extends StatefulWidget{
   const Homepage({super.key});
 @override
 State<Homepage> createState()=>_HomePageState();
 
 }
-String? _task;
+
 
 
 
@@ -29,7 +29,7 @@ class _HomePageState extends State<Homepage>{
   //   const EmployeesPage(),
   // ];
 
-  final DatabaseService _databaseService = DatabaseService.instance;
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -177,89 +177,7 @@ class _HomePageState extends State<Homepage>{
 
     
   }
-  
-  Widget _addTaskButton(){
-    return FloatingActionButton(onPressed: (){
-      showDialog(context: context, builder: (_)=> 
-      AlertDialog(
-        title: const Text('Add Task'),
-        
-        content: Column(
-          mainAxisSize:MainAxisSize.min,
-          children: [
-            TextField(
-              onChanged: (value){
-                setState(() {
-                  _task = value;
-                });
-              },
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-
-              ),
-            ),
-            
-            MaterialButton(
-              color: Theme.of(context).colorScheme.primary,
-              onPressed:
-              (){
-                if(_task == null || _task =="") return;
-                _databaseService.addTask(_task!);
-                setState(() {
-                  _task = null;
-
-                });
-                Navigator.pop(
-                  context
-                ,);
-              },
-              child: const Text(
-                "Done",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-              ),
-          ],
-        ),
-      )
-      ,);
-
-    },
-    child: const Icon(Icons.add
-    ),
-    );
-  }
-
-  Widget _tasksList(){
-    return FutureBuilder(future: _databaseService.getTasks(), builder: (context,snapshot){
-      return ListView.builder(
-        itemCount: snapshot.data?.length ?? 0,
-        itemBuilder: (context,index){
-          Task task = snapshot.data![index];
-          return ListTile(
-            onLongPress: () {
-              _databaseService.deleteTask(task.id);
-              setState(() {
-                
-              });
-            } ,
-            title: Text(
-            task.content,
-          ),
-          trailing: Checkbox(value: task.status == 1,
-           onChanged: (value){
-            _databaseService.updateTaskStatus(task.id, value== true ? 1:0,);
-            setState(() {
-               
-            });
-           }
-           ),
-          );
-        });
-
-    });
-  }
+ 
 
 
   

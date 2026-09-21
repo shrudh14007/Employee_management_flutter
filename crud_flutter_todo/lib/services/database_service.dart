@@ -1,100 +1,97 @@
-
-
-import 'package:crud_flutter_todo/models/task.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
+import 'package:crud_flutter_todo/user.dart';
 
 class DatabaseService {
   static Database? _db;
-  static final DatabaseService instance = DatabaseService._constructor();
-  final String _tasksTableName = "tasks";
-  final String _tasksIdColumnName = "id";
-  final String _tasksContentColumnName = "content";
-  final String _tasksStatusColumnName = "status";
+
+  static final DatabaseService instance =
+      DatabaseService._constructor();
 
   DatabaseService._constructor();
-  Future<Database> get database async{
-    if(_db != null) return _db!;
+
+  Future<Database> get database async {
+    if (_db != null) return _db!;
+
     _db = await getDatabase();
+
     return _db!;
-
-
-  }
-  Future<Database> getDatabase() async{
-    final databaseDirPath = await getDatabasesPath();
-    final databasePath = join(databaseDirPath,"master_db.db");
-    final database = await openDatabase(
-      databasePath, 
-      version: 1,
-      onCreate: (db, version)async{
-         await db.execute('''
-        CREATE TABLE $_tasksTableName(
-          $_tasksIdColumnName INTEGER PRIMARY KEY,
-          $_tasksContentColumnName TEXT NOT NULL,
-          $_tasksStatusColumnName INTEGER NOT NULL
-
-
-        ) 
-
-        '''
-        );
-      },
-    );
-    return database;
-  }
-  Future<void> addTask(String content
-  )async{
-    final db = await database ;
-    await db.insert(_tasksTableName,{
-    _tasksContentColumnName : content,
-    _tasksStatusColumnName:0
-    }
-    );
-     
   }
 
-  Future<List<Task>?> getTasks() async{
-    final db = await database;
-    final data = await db.query(_tasksTableName);
-    List<Task>tasks = data.map((e) => Task(id: e["id"] as int 
-    , status: e["status"] as int 
-    , content: e["content"] as String,),
-     ).toList();
-  return tasks;
-  }
- 
-Future<void> updateTaskStatus(int id, int status) async{
+  Future<List<User>> getUsers() async {
   final db = await database;
-  await db.update(_tasksTableName, {
-    _tasksStatusColumnName:status
-  },
-  where: 'id=?',
-  whereArgs: [
-    id,
-  ], 
+
+  final data = await db.query('users');
+
+  return data.map((e) {
+    return User(
+      e['id'] as int,
+      e['name'] as String,
+      e['profession'] as String,
+    );
+  }).toList();
+}
+
+Future<void> addUser(
+  String name,
+  String profession,
+) async {
+  final db = await database;
+
+  await db.insert(
+    'users',
+    {
+      'name': name,
+      'profession': profession,
+    },
   );
 }
 
-Future<void> updateTask(int id, String content)async{
+Future<void> updateUser(int id, String name, String profession)async{
   final db = await database;
-  await db.update(_tasksTableName,
-  {
-    _tasksContentColumnName:content,
-  },
+  await db.update(
+    'users',
+    {
+      'name':name,
+      'profession':profession
+    },
+    where: 'id=?',
+    whereArgs:[id],
+  );
+}
+
+Future <void> deleteUser(int id)async{
+ final db = await database;
+ await db.delete(
+  'users',
   where:'id=?',
   whereArgs:[id],
-  );
+ );
 }
 
-Future<void> deleteTask(int id) async {
-  final db = await database;
-  await db.delete(_tasksTableName,
-  where: 'id=?',
-  whereArgs: [
-    id,
-  ]
-  );
-}
 
+
+  Future<Database> getDatabase() async {
+    final databaseDirPath = await getDatabasesPath();
+    final databasePath = join(
+      databaseDirPath,
+      'master_db.db',
+    );
+
+    final database = await openDatabase(
+      databasePath,
+      version: 1,
+      onCreate: (db, version) async {
+        await db.execute('''
+          CREATE TABLE users(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            profession TEXT NOT NULL
+          )
+        ''');
+      },
+    );
+
+    return database;
+  }
 }

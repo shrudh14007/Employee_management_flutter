@@ -1,38 +1,54 @@
 import 'package:crud_flutter_todo/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:crud_flutter_todo/services/database_service.dart';
 
-// final usersProvider = Provider<List<User>>((ref) {
-//   return users;
-// });
+final databaseServiceProvider = Provider<DatabaseService>((ref) {
+  return DatabaseService.instance;
+});
 
-class UsersNotifier extends Notifier<List<User>>{
+class UsersNotifier extends AsyncNotifier<List<User>> {
   @override
+  Future<List<User>> build() async {
+    final database = ref.read(databaseServiceProvider);
 
-  //to initialize state 
-  List<User>build(){
+    final users = await database.getUsers();
+
     return users;
   }
+   Future<void> addUser(
+    String name,
+    String profession,
+  ) async {
+    final database = ref.read(databaseServiceProvider);
 
+    await database.addUser(
+      name,
+      profession,
+    );
 
-void addUser(String name, String profession){
-  state = [
-    ...state, User(name,profession)
-  ];
+    ref.invalidateSelf();
+  }
+  Future <void> updateUser(int id,String name,String profession ) async{
+    final database = ref.read(databaseServiceProvider);
+    await database.updateUser(id,name,profession);
+    ref.invalidateSelf();
+
+  }
+
+  Future <void> deleteUser(int id) async{
+    final database = ref.read(databaseServiceProvider);
+    await database.deleteUser(id);
+    ref.invalidateSelf();
+  }
+
 }
 
-void deleteUser(int index){
-  final newUsers=[...state];
-  newUsers.removeAt(index);
-  state = newUsers;
-}
-
-void updateUsers(int index, String name, String profession){
-  final newUsers = [...state];
-  newUsers[index] = User(name,profession);
-  state = newUsers;
-}
-
-}
-final usersProvider = NotifierProvider<UsersNotifier, List<User>>(
-  UsersNotifier.new
+final usersProvider =
+    AsyncNotifierProvider<UsersNotifier, List<User>>(
+  UsersNotifier.new,
 );
+
+final employeeMessageProvider =
+    Provider<String>((ref) {
+  return 'Employee management system';
+});
