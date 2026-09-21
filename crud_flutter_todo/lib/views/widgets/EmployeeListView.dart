@@ -9,6 +9,8 @@
     Widget build(BuildContext context, WidgetRef ref) {
       final userList = ref.watch(usersProvider);
 
+      final isActionLoading = ref.watch(employeeActionLoadingProvider);
+
       final employeeCount = userList.when(
         loading: () => 0,
         error: (error, stackTrace) => 0,
@@ -190,7 +192,9 @@
 
                   Navigator.pop(context);
                 },
-                child: const Text('Save'),
+                child: isActionLoading
+              ? const CircularProgressIndicator()
+              : const Text('Save'),
               ),
             ],
           );

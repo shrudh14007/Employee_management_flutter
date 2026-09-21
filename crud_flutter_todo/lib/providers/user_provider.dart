@@ -19,6 +19,8 @@ class UsersNotifier extends AsyncNotifier<List<User>> {
     String name,
     String profession,
   ) async {
+    ref.read(employeeActionLoadingProvider.notifier).state = true;
+    try{
     final database = ref.read(databaseServiceProvider);
 
     await database.addUser(
@@ -27,6 +29,11 @@ class UsersNotifier extends AsyncNotifier<List<User>> {
     );
 
     ref.invalidateSelf();
+    }
+    finally{
+      ref.read(employeeActionLoadingProvider.notifier).state = false;
+      
+    }
   }
   Future <void> updateUser(int id,String name,String profession ) async{
     final database = ref.read(databaseServiceProvider);
@@ -51,4 +58,8 @@ final usersProvider =
 final employeeMessageProvider =
     Provider<String>((ref) {
   return 'Employee management system';
+});
+
+final employeeActionLoadingProvider = StateProvider<bool>((ref){
+  return false;
 });
