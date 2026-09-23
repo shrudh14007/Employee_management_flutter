@@ -7,6 +7,23 @@
 
     @override
     Widget build(BuildContext context, WidgetRef ref) {
+
+            ref.listen<String?>(
+        employeeActionMessageProvider,
+        (previous, next) {
+          if (next == null) return;
+
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(next),
+            ),
+          );
+
+          ref
+              .read(employeeActionMessageProvider.notifier)
+              .clearMessage();
+        },
+      );
       final userList = ref.watch(usersProvider);
 
       final isActionLoading = ref.watch(employeeActionLoadingProvider);

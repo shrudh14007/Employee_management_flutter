@@ -1,6 +1,7 @@
 import 'package:crud_flutter_todo/user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:crud_flutter_todo/services/database_service.dart';
+import 'package:flutter_riverpod/legacy.dart';
 
 final databaseServiceProvider = Provider<DatabaseService>((ref) {
   return DatabaseService.instance;
@@ -29,10 +30,15 @@ class UsersNotifier extends AsyncNotifier<List<User>> {
     );
 
     ref.invalidateSelf();
+    ref.read(employeeActionMessageProvider.notifier).showMessage('Employee Added Succesfully');
+
+    }
+    catch(error){
+      ref.read(employeeActionMessageProvider.notifier).showMessage('Failed to add Employee ');
     }
     finally{
       ref.read(employeeActionLoadingProvider.notifier).state = false;
-      
+
     }
   }
   Future <void> updateUser(int id,String name,String profession ) async{
@@ -49,6 +55,27 @@ class UsersNotifier extends AsyncNotifier<List<User>> {
   }
 
 }
+
+class EmployeeActionMessageProvider extends Notifier<String?> {
+  @override
+  String? build(){
+    return null;
+  }
+
+  void showMessage(String message){
+    state = message;
+
+  }
+
+  void clearMessage(){
+    state = null;
+
+  }
+}
+
+final employeeActionMessageProvider = NotifierProvider<EmployeeActionMessageProvider, String?>(
+  EmployeeActionMessageProvider.new,
+);
 
 final usersProvider =
     AsyncNotifierProvider<UsersNotifier, List<User>>(
