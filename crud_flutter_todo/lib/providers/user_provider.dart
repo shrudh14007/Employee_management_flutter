@@ -42,16 +42,38 @@ class UsersNotifier extends AsyncNotifier<List<User>> {
     }
   }
   Future <void> updateUser(int id,String name,String profession ) async{
+    ref.read(employeeActionLoadingProvider.notifier).state = true;
+
+    try{
     final database = ref.read(databaseServiceProvider);
     await database.updateUser(id,name,profession);
     ref.invalidateSelf();
+    ref.read(employeeActionMessageProvider.notifier).showMessage('Employee updated Succesfully');
+    }
+    catch(error){
+      ref.read(employeeActionMessageProvider.notifier).showMessage('Employee Not updated');
+    }
+    finally{
+      ref.read(employeeActionLoadingProvider.notifier).state = false;
+    }
+
 
   }
 
   Future <void> deleteUser(int id) async{
+    ref.read(employeeActionLoadingProvider.notifier).state = true;
+    try{
     final database = ref.read(databaseServiceProvider);
     await database.deleteUser(id);
     ref.invalidateSelf();
+    ref.read(employeeActionMessageProvider.notifier).showMessage('Employee Deleted');
+    }
+    catch(error){
+      ref.read(employeeActionMessageProvider.notifier).showMessage('Employee deletion unsuccessful');
+    }
+    finally{
+      ref.read(employeeActionLoadingProvider.notifier).state = false;
+    }
   }
 
 }
