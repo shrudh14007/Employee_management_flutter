@@ -182,6 +182,12 @@
                   decoration: const InputDecoration(
                     labelText: 'Name',
                   ),
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) {
+                      return 'Name is required';
+                    }
+                    return null;
+                  }
                 ),
 
                 TextFormField(
@@ -189,6 +195,12 @@
                   decoration: const InputDecoration(
                     labelText: 'Profession',
                   ),
+                  validator: (value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Profession is required';
+    }
+    return null;
+                  }
                 ),
               ],
             ),
