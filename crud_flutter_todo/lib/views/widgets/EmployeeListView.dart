@@ -164,6 +164,7 @@
     onPressed: () {
       final nameController = TextEditingController();
       final professionController = TextEditingController();
+      final formKey = GlobalKey<FormState>();
 
       showDialog(
         context: context,
@@ -171,23 +172,26 @@
           return AlertDialog(
             title: const Text('Add Employee'),
 
-            content: Column(
+            content: Form(
+              key:formKey,
+              child:Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                TextField(
+                TextFormField(
                   controller: nameController,
                   decoration: const InputDecoration(
                     labelText: 'Name',
                   ),
                 ),
 
-                TextField(
+                TextFormField(
                   controller: professionController,
                   decoration: const InputDecoration(
                     labelText: 'Profession',
                   ),
                 ),
               ],
+            ),
             ),
 
             actions: [
@@ -200,6 +204,7 @@
 
               ElevatedButton(
                 onPressed: () async {
+                  if(formKey.currentState!.validate()){
                   await ref
                       .read(usersProvider.notifier)
                       .addUser(
@@ -208,6 +213,7 @@
                       );
 
                   Navigator.pop(context);
+                }
                 },
                 child: isActionLoading
               ? const CircularProgressIndicator()
