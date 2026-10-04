@@ -86,6 +86,7 @@
         final professionController = TextEditingController(
           text: user.profession,
         );
+        final formKey = GlobalKey<FormState>();
 
         showDialog(
           context: context,
@@ -93,23 +94,47 @@
             return AlertDialog(
               title: const Text('Edit Employee'),
 
-              content: Column(
+              content: Form(
+              key:formKey,
+              child:Column
+              (
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  TextField(
+                  TextFormField(
                     controller: nameController,
                     decoration: const InputDecoration(
                       labelText: 'Name',
                     ),
+                    validator:(value){
+                      if(value == null || value.trim().isEmpty){
+                        return 'Name is required';
+                      }
+                      if(value.trim().length < 2){
+                        return 'Name must be atleast 2 characters';
+                      }
+                      return null;
+                    }
                   ),
-                  TextField(
+                  TextFormField(
                     controller: professionController,
                     decoration: const InputDecoration(
                       labelText: 'Profession',
                     ),
+                    validator:(value){
+                        if(value == null || value.trim().isEmpty){
+                          return 'Profession is required';
+                        }
+                        if(value.trim().length < 2){
+                          return 'Profession must be atleast 2 characters';
+
+                        }
+                        return null;
+                      }
+                    
                   ),
                 ],
               ),
+             ),
 
               actions: [
                 TextButton(
@@ -121,6 +146,7 @@
 
                 ElevatedButton(
                   onPressed: () async {
+                    if(formKey.currentState!.validate()){
                     await ref
                         .read(usersProvider.notifier)
                         .updateUser(
@@ -130,6 +156,7 @@
                         );
 
                     Navigator.pop(context);
+                  }
                   },
                   child: const Text('Save'),
                 ),
