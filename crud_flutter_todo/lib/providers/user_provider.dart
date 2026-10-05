@@ -7,6 +7,12 @@ final databaseServiceProvider = Provider<DatabaseService>((ref) {
   return DatabaseService.instance;
 });
 
+final employeeProvider = FutureProvider.family<User?, int>((ref,id) async{
+  final database= ref.read(databaseServiceProvider);
+  return database.getUserById(id); 
+});
+
+
 class UsersNotifier extends AsyncNotifier<List<User>> {
   @override
   Future<List<User>> build() async {

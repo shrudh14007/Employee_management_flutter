@@ -95,24 +95,24 @@ Future <void> deleteUser(int id)async{
     return database;
   }
 
-  Future<Users?>getUserById(int id) async{
+  Future<User?> getUserById(int id) async{
     final db = await database;
     final data = await db.query(
       'users',
       where:'id=?',
       whereArgs:[id],
+    );
 
-    )
     if(data.isEmpty){
       return null;
 
     }
     final user = data.first;
     return User(
-      user['id'] as int;
-      user['name'] as String;
-      user['profession'] as String;
-      
-    )
+      user['id'] as int,
+      user['name'] as String,
+      user['profession'] as String,
+
+    );
   }
 }

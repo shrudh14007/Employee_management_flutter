@@ -25,6 +25,7 @@
         },
       );
       final userList = ref.watch(usersProvider);
+      final employee = ref.watch(employeeProvider(7));
 
       final isActionLoading = ref.watch(employeeActionLoadingProvider);
 
@@ -33,6 +34,19 @@
         error: (error, stackTrace) => 0,
         data: (users) => users.length,
       );
+
+
+      employee.when(
+  loading: () {
+    print('Loading employee 1...');
+  },
+  error: (error, stackTrace) {
+    print('Error: $error');
+  },
+  data: (user) {
+    print('Employee: ${user?.name}');
+  },
+);
 
       return Scaffold(
         appBar: AppBar(
